@@ -23,7 +23,6 @@ router.post('/signup', function(req, res, next) {
         telNumber: req.body.telNumber,
         username: req.body.username,
         password: bcrypt.hashSync(req.body.password, 10)
-
     });
     user.save(function (err, result) {
         if (err){

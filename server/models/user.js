@@ -12,7 +12,6 @@ const Schema = new mongoose.Schema({
     telNumber: {type: String},
     username: {type: String, required: true},
     password: {type: String}
-
 });
 
 Schema.plugin(mongooseUniqueValidator);

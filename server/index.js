@@ -4,7 +4,7 @@ var cookieParser = require('cookie-parser');    // storing user cookies
 var bodyParser = require('body-parser');        // sending json
 var mongoose = require('mongoose');             // using data modeling library for mongo
 
-var authRoutes = require('./routes/auth');      
+var authRoutes = require('./routes/auth');
 
 var app = express();
 
