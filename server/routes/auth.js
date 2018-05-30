@@ -1,12 +1,9 @@
 var express = require('express');
-var router = express.Router();      // using express router
-var fs = require('fs');
+var router = express.Router();              // using express router
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
-var mongoose = require('mongoose');
 
-var User = require('../models/user');
-
+var User = require('../models/user');       // model to signup users
 
 router.post('/', function(req, res, next) {
     return res.status(500).json({
@@ -26,6 +23,7 @@ router.post('/signup', function(req, res, next) {
         telNumber: req.body.telNumber,
         username: req.body.username,
         password: bcrypt.hashSync(req.body.password, 10)
+
     });
     user.save(function (err, result) {
         if (err){
@@ -65,3 +63,5 @@ router.post('/signin', function (req, res, next) {
         })
     });
 });
+
+module.exports = router;

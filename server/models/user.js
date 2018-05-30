@@ -9,8 +9,9 @@ const Schema = new mongoose.Schema({
     firstName: {type: String, required: true},
     lastName: {type: String, required: true},
     idNumber: {type: Number, required: true, unique: true},
-    telNumber: {type: Number},
-    username: {type: Number, required: true}
+    telNumber: {type: String},
+    username: {type: String, required: true},
+    password: {type: String}
 
 });
 

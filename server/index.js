@@ -6,11 +6,9 @@ var mongoose = require('mongoose');             // using data modeling library f
 
 var authRoutes = require('./routes/auth');      
 
-
-
-
 var app = express();
 
+mongoose.connect('mongodb://localhost:27017/afrihost');
 
 
 app.use(logger('dev'));
@@ -18,10 +16,6 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/', function (req, res) {
-   res.send('GET request to homepage')
-});
+app.use('/auth', authRoutes);
 
-app.post('/', function (req, res) {
-    res.send('POST request to homepage')
-});
+app.listen(3000, () => console.log('Example app listening on port 3000!'))
