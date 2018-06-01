@@ -1,15 +1,14 @@
-var express = require('express');
-var logger = require('morgan');                 // used for logging
-var cookieParser = require('cookie-parser');    // storing user cookies
-var bodyParser = require('body-parser');        // sending json
-var mongoose = require('mongoose');             // using data modeling library for mongo
+import express from 'express';
+import logger from 'morgan';                 // used for logging
+import cookieParser from 'cookie-parser';    // storing user cookies
+import bodyParser from 'body-parser';        // sending json
+import mongoose from 'mongoose';             // using data modeling library for mongo
 
-var authRoutes = require('./routes/auth');
+import authRoutes from'./routes/auth';
 
-var app = express();
+const app = express();
 
 mongoose.connect('mongodb://localhost:27017/afrihost');
-
 
 app.use(logger('dev'));
 app.use(cookieParser());
@@ -18,4 +17,4 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/auth', authRoutes);
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(6000, () => console.log('Example app listening on port 6000!'));
