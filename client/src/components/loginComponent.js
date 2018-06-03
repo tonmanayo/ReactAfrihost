@@ -26,31 +26,11 @@ function parseJSON(response) {
     return response.json()
 }
 
-function loginVerify(username, password) {
-    fetch('http://localhost:3001/auth/signin', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            username: username,
-            password: password
-        })})
-        .then(checkStatus)
-        .then(parseJSON)
-        .then(function(data) {
-            console.log('request succeeded with JSON response', data)
-        }).catch(function(error) {
-        console.log('request failed', error)
-    })
-}
-
 class LoginComponent extends Component {
     constructor(props, context) {
         super(props, context);
 
-       this.handleUsername = this.handleUsername.bind(this);
-       this.handlePassword = this.handlePassword.bind(this);
+       this.handleTextChange = this.handleTextChange.bind(this);
        this.loginVerify = this.loginVerify.bind(this);
        this.state = {
             username: '',
@@ -87,20 +67,12 @@ class LoginComponent extends Component {
     //     return null;
     // }
 
-
-
-    handleUsername(e) {
-        this.setState({ username: e.target.value });
-    }
-
-    handlePassword(e) {
-        this.setState({ password: e.target.value });
+    handleTextChange(e) {
+        this.setState({[e.target.name]: e.target.value });
     }
 
     render() {
         return (
-            <div className="App">
-
                     <FormGroup
                         controlId="formBasicText"
                         //validationState={this.getValidationState()}
@@ -112,16 +84,16 @@ class LoginComponent extends Component {
                                 type="text"
                                 label="username"
                                 placeholder="Enter Username"
-                                value={this.state.username}
-                                onChange={this.handleUsername}
+                                name="username"
+                                onChange={this.handleTextChange}
                             />
                             <FieldGroup
-                                id="formControlsText"
+                                id="formControlsPassword"
                                 type="password"
                                 label="Password"
-                                value={this.state.password}
                                 placeholder="Enter Password"
-                                onChange={this.handlePassword}
+                                name="password"
+                                onChange={this.handleTextChange}
                             />
 
                             <Button onClick={
@@ -132,8 +104,6 @@ class LoginComponent extends Component {
                         <FormControl.Feedback />
                         <HelpBlock>Validation is based on string length.</HelpBlock>
                     </FormGroup>
-
-            </div>
         );
     }
 }

@@ -31,8 +31,10 @@ router.post('/signup', (req, res, next) => {
                 error: err
             })
         }
+        const token = jwt.sign({user: user}, 'Afrihost', {expiresIn: 604800});  //Tuesday 14 August, guessing 1 week
         res.status(201).json({
             title: 'user created',
+            token: token,
             obj: result
         });
     })
