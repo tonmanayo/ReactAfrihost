@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';        // sending json
 import mongoose from 'mongoose';             // using data modeling library for mongo
 
 import authRoutes from'./routes/auth';
+import productRoutes from './routes/products'
 
 const app = express();
 
@@ -23,5 +24,6 @@ app.use((req, res, next) => {
 });
 
 app.use('/auth', authRoutes);
+app.use('/products', productRoutes);
 
 app.listen(3001, () => console.log('Example app listening on port 3001!'));

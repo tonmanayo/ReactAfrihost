@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap'
 import {FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap'
+import jwt_decode from 'jwt-decode';
 
 function FieldGroup({ id, label, help, ...props }) {
     return (
@@ -52,9 +53,13 @@ class LoginComponent extends Component {
             .then(checkStatus)
             .then(parseJSON)
             .then(function(data) {
-                console.log('request succeeded with JSON response', data)
+                const userInfo = jwt_decode(data['token']);
+                localStorage.setItem('user', userInfo['user']);
+                localStorage.setItem('token', data['userId']);
+                localStorage.setItem('userId', data['token']);
+                console.log('request succeeded with JSON response', data);
             }).catch(function(error) {
-            console.log('request failed', error)
+                console.log('request failed', error)
         })
     }
 
