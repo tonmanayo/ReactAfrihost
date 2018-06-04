@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LoginComponent from './loginComponent'
 import SignupComponent from "./signupComponent";
+import ProductsComponent from "./productsPage";
 
 
 class Home extends Component {
@@ -20,7 +21,7 @@ class Home extends Component {
     }
 
     render() {
-        if (this.state.token === '') {
+        if (this.state.token !== '') {
             return (
                 <div style={{width: '100%'}}>
                     <div style={{width: '45%', float: 'left'}}>
@@ -34,7 +35,7 @@ class Home extends Component {
             );
         } else {
             return (
-                <div>Welcome</div>
+                <ProductsComponent/>
             );
         }
     }

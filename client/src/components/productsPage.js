@@ -31,26 +31,32 @@ class ProductsComponent extends Component {
         super(props, context);
 
         this.handleTextChanges = this.handleTextChanges.bind(this);
-        this.signupVerify = this.signupVerify.bind(this);
+        this.addProduct = this.addProduct.bind(this);
         this.state = {
-            companyName: '',
+            uid: '',
+            friendlyName: '',
+            isPaused: '',
+            status: ''
         };
     }
 
-    signupVerify() {
+    addProduct() {
         console.log(this.state);
-        fetch('http://localhost:3001/auth/signup', {
+        fetch('http://localhost:3001/products/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
+                friendlyName: this.state.friendlyName,
+                isPaused: this.state.isPaused,
+                status: this.state.status,
+                uid: this.state.uid
 
             })})
             .then(checkStatus)
             .then(parseJSON)
             .then((data) => {
-                this.props.onSignup(data);
                 console.log('request succeeded with JSON response', data)
             }).catch(function(error) {
             console.log('request failed', error)
@@ -74,7 +80,53 @@ class ProductsComponent extends Component {
 
     render() {
         return (
+            <FormGroup
+                controlId="formBasicText"
+                //validationState={this.getValidationState()}
+            >
+                <ControlLabel>Create New Product</ControlLabel>
+                <form>
+                    <FieldGroup
+                        id="formControlsProductName"
+                        type="text"
+                        label="Product Name"
+                        placeholder="Product Name"
+                        name="uid"
+                        onChange={this.handleTextChanges}
+                    />
+                    <FieldGroup
+                        id="formControlsFriendlyName"
+                        type="text"
+                        label="Friendly Name"
+                        placeholder="Friendly Name"
+                        name="friendlyName"
+                        onChange={this.handleTextChanges}
+                    />
+                    <FieldGroup
+                        id="formControlsIsPaused"
+                        type="text"
+                        label="Is Paused?"
+                        placeholder="Is Paused?"
+                        name="isPaused"
+                        onChange={this.handleTextChanges}
+                    />
+                    <FieldGroup
+                        id="formControlsStatus"
+                        type="text"
+                        label="Status"
+                        placeholder="Status"
+                        name="status"
+                        onChange={this.handleTextChanges}
+                    />
 
+                    <Button onClick={
+                        this.addProduct
+                    } bsStyle="primary"  >Submit</Button>
+
+                </form>
+                <FormControl.Feedback />
+                <HelpBlock>Validation is based on string length.</HelpBlock>
+            </FormGroup>
 
         );
     }
