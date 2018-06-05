@@ -42,23 +42,23 @@ class CreateProductComponent extends Component {
 
     addProduct() {
         console.log(this.state);
+        const {friendlyName, isPaused, status, uid} = this.state;
         fetch('http://localhost:3001/products/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                friendlyName: this.state.friendlyName,
-                isPaused: this.state.isPaused,
-                status: this.state.status,
-                uid: this.state.uid
-
+                friendlyName: friendlyName,
+                isPaused: isPaused,
+                status: status,
+                uid: uid
             })})
             .then(checkStatus)
             .then(parseJSON)
             .then((data) => {
-                console.log('request succeeded with JSON response', data)
-                this.props.getProducts()
+                console.log('request succeeded with JSON response', data);
+                this.props.onAdd(friendlyName, isPaused, status, uid);
             }).catch(function(error) {
             console.log('request failed', error)
         })

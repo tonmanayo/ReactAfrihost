@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import LoginComponent from './loginComponent'
 import SignupComponent from "./signupComponent";
-import ProductsComponent from "./productsPage";
+import ProductsComponent from "../products/productsPage";
 
 
 class Home extends Component {
