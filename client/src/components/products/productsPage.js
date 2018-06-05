@@ -53,7 +53,7 @@ class ProductsComponent extends Component {
         this.setState({products: filter})
     }
 
-    onAdd(friendlyName, isPaused, status, uid){
+    onAdd(friendlyName, isPaused, status, uid, _id){
         let products = this.state.products;
         products.push({
             createdAt: Date.now(),
@@ -61,6 +61,7 @@ class ProductsComponent extends Component {
             friendlyName: friendlyName,
             isPaused: isPaused,
             status: status,
+            _id: _id,
             uid: uid
         });
         this.setState({products: products})

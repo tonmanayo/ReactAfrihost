@@ -40,8 +40,9 @@ class CreateProductComponent extends Component {
         };
     }
 
-    addProduct() {
+    addProduct(e) {
         console.log(this.state);
+        e.preventDefault();
         const {friendlyName, isPaused, status, uid} = this.state;
         fetch('http://localhost:3001/products/add', {
             method: 'POST',
@@ -58,7 +59,7 @@ class CreateProductComponent extends Component {
             .then(parseJSON)
             .then((data) => {
                 console.log('request succeeded with JSON response', data);
-                this.props.onAdd(friendlyName, isPaused, status, uid);
+                this.props.onAdd(friendlyName, isPaused, status, uid, data["obj"]._id);
             }).catch(function(error) {
             console.log('request failed', error)
         })
@@ -78,7 +79,9 @@ class CreateProductComponent extends Component {
                     //validationState={this.getValidationState()}
                 >
                     <ControlLabel>Create New Product</ControlLabel>
-                    <form>
+                    <form onSubmit={
+                        this.addProduct
+                    }>
                         <FieldGroup
                             id="formControlsProductName"
                             type="text"
@@ -112,9 +115,7 @@ class CreateProductComponent extends Component {
                             onChange={this.handleTextChanges}
                         />
 
-                        <Button onClick={ () => {
-                            this.addProduct()
-                        }} bsStyle="primary"  >Submit</Button>
+                        <Button type="submit" bsStyle="primary"  >Submit</Button>
 
                     </form>
                     <FormControl.Feedback />
