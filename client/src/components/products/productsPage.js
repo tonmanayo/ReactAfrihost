@@ -17,6 +17,7 @@ function parseJSON(response) {
 }
 
 class ProductsComponent extends Component {
+
     constructor(props, context) {
         super(props, context);
 
@@ -24,6 +25,11 @@ class ProductsComponent extends Component {
             products: ["No Products"]
         };
         this.getProducts = this.getProducts.bind(this);
+
+    }
+
+
+    componentWillMount() {
         this.getProducts();
     }
 
@@ -33,7 +39,6 @@ class ProductsComponent extends Component {
             .then(parseJSON)
             .then((data) => {
                 this.setState({products: data["products"]});
-                console.log(this.state.products)
             }).catch(function(error) {
             console.log('request failed', error)
         })
@@ -46,11 +51,9 @@ class ProductsComponent extends Component {
                     <CreateProductComponent getProducts={this.getProducts}/>
                 </div>
                 <div style={{width: '45%', float: 'right'}}>
-                    <ShowProductsComponent products={this.state.products}/>
+                    <ShowProductsComponent products={this.state.products} getProducts={this.getProducts}/>
                 </div>
             </div>
-
-
         );
     }
 }

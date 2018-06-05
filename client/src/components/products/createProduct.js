@@ -112,9 +112,9 @@ class CreateProductComponent extends Component {
                             onChange={this.handleTextChanges}
                         />
 
-                        <Button onClick={
-                            this.addProduct
-                        } bsStyle="primary"  >Submit</Button>
+                        <Button onClick={ () => {
+                            this.addProduct()
+                        }} bsStyle="primary"  >Submit</Button>
 
                     </form>
                     <FormControl.Feedback />
