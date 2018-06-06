@@ -23,7 +23,6 @@ class SignupComponent extends Component {
     }
 
     signupVerify() {
-        console.log(this.state);
         fetch('http://localhost:3001/auth/signup', {
             method: 'POST',
             headers: {
@@ -43,7 +42,7 @@ class SignupComponent extends Component {
             .then(checkStatus)
             .then(parseJSON)
             .then((data) => {
-                this.props.onSignup(data);
+                this.props.isSignedIn();
                 console.log('request succeeded with JSON response', data)
             }).catch(function(error) {
             console.log('request failed', error)

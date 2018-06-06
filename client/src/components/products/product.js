@@ -3,7 +3,6 @@ import {Button} from 'react-bootstrap';
 import '../../table.css';
 import {checkStatus, parseJSON} from '../../utils/util';
 
-
 class ProductComponent extends Component {
     constructor(props, context) {
         super(props, context);

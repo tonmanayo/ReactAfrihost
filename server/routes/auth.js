@@ -1,3 +1,5 @@
+import Product from "../models/product";
+
 const express = require('express');
 const router = express.Router();              // using express router
 const bcrypt = require('bcryptjs');
@@ -62,6 +64,21 @@ router.post('/signin', (req, res, next) => {
             token: token,
             userId: user._id
         })
+    });
+});
+
+router.get('/findUser/:id', (req, res, next) => {
+    Product.findOne({_id: req.params.id }, (err, user) => {
+        if(err) {
+            return res.status(500).json({
+                title: "error, No user Registered",
+                error: err
+            })
+        }
+        return res.status(201).json({
+            title: 'Successfully Found user',
+            user: user
+        });
     });
 });
 

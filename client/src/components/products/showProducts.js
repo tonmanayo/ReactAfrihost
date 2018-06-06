@@ -1,14 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import '../../table.css';
 import ProductComponent from "./product";
 
-
-
 class ShowProductsComponent extends Component {
-    constructor(props, context) {
-        super(props, context);
-    }
-
     render() {
         return (
             <div className="productList">
