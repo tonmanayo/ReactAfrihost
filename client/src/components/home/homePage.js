@@ -3,7 +3,6 @@ import LoginComponent from './loginComponent'
 import SignupComponent from "./signupComponent";
 import ProductsComponent from "../products/productsPage";
 
-
 class Home extends Component {
     constructor(props, context) {
         super(props, context);

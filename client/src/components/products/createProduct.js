@@ -1,30 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap'
 import {FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap'
-
-function FieldGroup({ id, label, help, ...props }) {
-    return (
-        <FormGroup controlId={id}>
-            <ControlLabel>{label}</ControlLabel>
-            <FormControl {...props}/>
-            {help && <HelpBlock>{help}</HelpBlock>}
-        </FormGroup>
-    );
-}
-
-function checkStatus(response) {
-    if (response.status >= 200 && response.status < 300) {
-        return response
-    } else {
-        let error = new Error(response.statusText);
-        error.response = response;
-        throw error
-    }
-}
-
-function parseJSON(response) {
-    return response.json()
-}
+import {FieldGroup, checkStatus, parseJSON} from '../../utils/util';
 
 class CreateProductComponent extends Component {
     constructor(props, context) {
@@ -64,8 +41,6 @@ class CreateProductComponent extends Component {
             console.log('request failed', error)
         })
     }
-
-
 
     handleTextChanges(e) {
         this.setState({ [e.target.name]: e.target.value });
