@@ -12,12 +12,12 @@ class LoginComponent extends Component {
        this.loginVerify = this.loginVerify.bind(this);
        this.state = {
             username: '',
-            password:''
+            password:'',
+            error: ''
        };
     }
 
     loginVerify() {
-        console.log(this.state);
         fetch('http://localhost:3001/auth/signin', {
             method: 'POST',
             headers: {
@@ -29,25 +29,16 @@ class LoginComponent extends Component {
             })})
             .then(checkStatus)
             .then(parseJSON)
-            .then(function(data) {
+            .then((data) => {
                 const userInfo = jwt_decode(data['token']);
-                localStorage.setItem('user', userInfo['user']);
-                localStorage.setItem('token', data['userId']);
-                localStorage.setItem('userId', data['token']);
-                console.log('request succeeded with JSON response', data);
-            }).catch(function(error) {
-                console.log('request failed', error)
+                localStorage.setItem('user', JSON.stringify(userInfo['user']));
+                localStorage.setItem('token', JSON.stringify(data['token']));
+                localStorage.setItem('userId', JSON.stringify(data['userId']));
+                this.props.isSignedIn();
+            }).catch((error) => {
+                this.setState({error: "Login Failed - " + error});
         })
     }
-
-
-    // getValidationState() {
-    //     const length = this.state.password.length;
-    //     if (length > 10) return 'success';
-    //     else if (length > 5) return 'warning';
-    //     else if (length > 0) return 'error';
-    //     return null;
-    // }
 
     handleTextChange(e) {
         this.setState({[e.target.name]: e.target.value });
@@ -55,10 +46,7 @@ class LoginComponent extends Component {
 
     render() {
         return (
-                    <FormGroup
-                        controlId="formBasicText"
-                        //validationState={this.getValidationState()}
-                    >
+                    <FormGroup controlId="formBasicText">
                         <ControlLabel>Enter User Name and Password</ControlLabel>
                         <form>
                             <FieldGroup
@@ -84,7 +72,7 @@ class LoginComponent extends Component {
 
                                 </form>
                         <FormControl.Feedback />
-                        <HelpBlock>Validation is based on string length.</HelpBlock>
+                        <HelpBlock > <p style={{color: "red"}}>{this.state.error} </p></HelpBlock>
                     </FormGroup>
         );
     }

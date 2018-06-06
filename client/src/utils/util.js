@@ -24,3 +24,20 @@ export function checkStatus(response) {
 export function parseJSON(response) {
     return response.json()
 }
+
+export function getFromStorage(key) {
+    if (!key) {
+        console.log("Error: no Key");
+        return null
+    }
+    try {
+        const valueStr = getFromStorage(key);
+        if (valueStr) {
+            return JSON.parse(valueStr)
+        }
+        return null
+    } catch (err) {
+        console.log(err);
+        return null
+    }
+}

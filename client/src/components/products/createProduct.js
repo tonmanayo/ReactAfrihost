@@ -51,7 +51,6 @@ class CreateProductComponent extends Component {
             <div className="createProduct">
                 <FormGroup
                     controlId="formBasicText"
-                    //validationState={this.getValidationState()}
                 >
                     <ControlLabel>Create New Product</ControlLabel>
                     <form onSubmit={
@@ -91,7 +90,6 @@ class CreateProductComponent extends Component {
                         />
 
                         <Button type="submit" bsStyle="primary"  >Submit</Button>
-
                     </form>
                     <FormControl.Feedback />
                     <HelpBlock>Validation is based on string length.</HelpBlock>
