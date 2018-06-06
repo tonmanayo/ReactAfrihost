@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e67fba13-46ac-4b53-b8e2-0a4550ae7619" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/home/homePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/home/homePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/home/loginComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/home/loginComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/home/signupComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/home/signupComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/products/createProduct.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/products/createProduct.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/products/product.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/products/product.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/products/showProducts.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/products/showProducts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/utils/util.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/utils/util.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/auth.js" afterDir="false" />
-    </list>
+    <list default="true" id="e67fba13-46ac-4b53-b8e2-0a4550ae7619" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,11 +11,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="homePage.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="homePage.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/src/components/home/homePage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="59" column="26" lean-forward="true" selection-start-line="59" selection-start-column="26" selection-end-line="59" selection-end-column="26" />
+            <state>
+              <caret lean-forward="true" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -33,11 +23,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="loginComponent.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="loginComponent.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/components/home/loginComponent.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="39" column="53" selection-start-line="39" selection-start-column="53" selection-end-line="39" selection-end-column="53" />
+            <state relative-caret-position="173">
+              <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -62,6 +52,8 @@
       <find>products</find>
       <find>con</find>
       <find>props</find>
+      <find>conso</find>
+      <find>cons</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -102,8 +94,8 @@
         <option value="$PROJECT_DIR$/client/src/utils/util.js" />
         <option value="$PROJECT_DIR$/client/src/components/products/product.js" />
         <option value="$PROJECT_DIR$/client/src/components/products/createProduct.js" />
-        <option value="$PROJECT_DIR$/client/src/components/home/homePage.js" />
         <option value="$PROJECT_DIR$/client/src/components/home/loginComponent.js" />
+        <option value="$PROJECT_DIR$/client/src/components/home/homePage.js" />
       </list>
     </option>
   </component>
@@ -335,12 +327,12 @@
       <workItem from="1528018448110" duration="37203000" />
       <workItem from="1528119213020" duration="18113000" />
       <workItem from="1528201844896" duration="11968000" />
-      <workItem from="1528268879962" duration="12242000" />
+      <workItem from="1528268879962" duration="13196000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="100004000" />
+    <option name="totallyTimeSpent" value="100958000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -352,17 +344,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1535" height="904" extended-state="6" />
-    <editor active="true" />
+    <frame x="-1535" y="-4" width="1535" height="904" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20965609" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20965609" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32988358" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50054586" side_tool="true" weight="0.32948583" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49945414" visible="true" weight="0.26778784" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.49945414" visible="true" weight="0.26778784" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" id="Palette" order="3" />
@@ -776,20 +767,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/components/home/homePage.js">
+    <entry file="file://$PROJECT_DIR$/client/src/components/home/loginComponent.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="59" column="26" lean-forward="true" selection-start-line="59" selection-start-column="26" selection-end-line="59" selection-end-column="26" />
+        <state relative-caret-position="173">
+          <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/components/home/loginComponent.js">
+    <entry file="file://$PROJECT_DIR$/client/src/components/home/homePage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="39" column="53" selection-start-line="39" selection-start-column="53" selection-end-line="39" selection-end-column="53" />
+        <state>
+          <caret lean-forward="true" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
