@@ -1,4 +1,4 @@
-<h1>Learning to useReact<h1>
+<h1>Learning to use React<h1>
 
 
 <br>
