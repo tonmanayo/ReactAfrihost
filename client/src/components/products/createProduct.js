@@ -2,25 +2,19 @@ import React, { Component } from 'react';
 import { Button } from 'react-bootstrap'
 import {FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap'
 import {FieldGroup, checkStatus, parseJSON} from '../../utils/util';
+import {actions} from "../../actions/home";
+import {connect} from "react-redux";
 
 class CreateProductComponent extends Component {
     constructor(props, context) {
         super(props, context);
 
-        this.handleTextChanges = this.handleTextChanges.bind(this);
         this.addProduct = this.addProduct.bind(this);
-        this.state = {
-            uid: '',
-            friendlyName: '',
-            isPaused: '',
-            status: '',
-        };
     }
 
     addProduct(e) {
-        console.log(this.state);
         e.preventDefault();
-        const {friendlyName, isPaused, status, uid} = this.state;
+        const {friendlyName, isPaused, status, uid} = this.props;
         fetch('http://localhost:3001/products/add', {
             method: 'POST',
             headers: {
@@ -42,10 +36,6 @@ class CreateProductComponent extends Component {
         })
     }
 
-    handleTextChanges(e) {
-        this.setState({ [e.target.name]: e.target.value });
-    }
-
     render() {
         return (
             <div className="createProduct">
@@ -62,7 +52,7 @@ class CreateProductComponent extends Component {
                             label="Product Name"
                             placeholder="Product Name"
                             name="uid"
-                            onChange={this.handleTextChanges}
+                            onChange={this.props.onNewTextChange}
                         />
                         <FieldGroup
                             id="formControlsFriendlyName"
@@ -70,7 +60,7 @@ class CreateProductComponent extends Component {
                             label="Friendly Name"
                             placeholder="Friendly Name"
                             name="friendlyName"
-                            onChange={this.handleTextChanges}
+                            onChange={this.props.onNewTextChange}
                         />
                         <FieldGroup
                             id="formControlsIsPaused"
@@ -78,7 +68,7 @@ class CreateProductComponent extends Component {
                             label="Is Paused?"
                             placeholder="Is Paused?"
                             name="isPaused"
-                            onChange={this.handleTextChanges}
+                            onChange={this.props.onNewTextChange}
                         />
                         <FieldGroup
                             id="formControlsStatus"
@@ -86,13 +76,13 @@ class CreateProductComponent extends Component {
                             label="Status"
                             placeholder="Status"
                             name="status"
-                            onChange={this.handleTextChanges}
+                            onChange={this.props.onNewTextChange}
                         />
 
                         <Button type="submit" bsStyle="primary"  >Submit</Button>
                     </form>
                     <FormControl.Feedback />
-                    <HelpBlock>Validation is based on string length.</HelpBlock>
+                    {/*<HelpBlock>Validation is based on string length.</HelpBlock>*/}
                 </FormGroup>
             </div>
 
@@ -100,4 +90,21 @@ class CreateProductComponent extends Component {
     }
 }
 
-export default CreateProductComponent;
+function mapStateToProps(state) {
+    return {
+        uid: state.uid,
+        friendlyName: state.friendlyName,
+        isPaused: state.isPaused,
+        status: state.status,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        onNewTextChange(newTextChange) {
+            dispatch(actions.handleTextChanged(newTextChange))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateProductComponent);

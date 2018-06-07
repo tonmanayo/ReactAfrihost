@@ -10,7 +10,11 @@ const initialState = {
     lastName: '',
     idNumber: 0,
     telNumber: '',
-    companyName: ''
+    companyName: '',
+    uid: '',
+    friendlyName: '',
+    isPaused: '',
+    status: '',
 };
 
 export function reducer(state = initialState, action) {
