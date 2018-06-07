@@ -4,7 +4,7 @@ import {FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap'
 import jwt_decode from 'jwt-decode';
 import {FieldGroup, checkStatus, parseJSON} from '../../utils/util';
 import { connect } from 'react-redux';
-import { actions } from './../../stores/store'
+import { actions } from './../../actions/home'
 
 class LoginComponent extends Component {
     constructor(props, context) {

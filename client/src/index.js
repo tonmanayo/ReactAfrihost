@@ -2,12 +2,10 @@ import React from 'react';
 import { render } from 'react-dom';
 
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
-import { logger } from 'redux-logger';
-import { reducer } from './stores/store';
+import { createStore } from 'redux';
+import { reducer } from './reducers/home';
 
 import App from './App';
-
 
 const store = createStore(reducer);
 render(
@@ -16,4 +14,3 @@ render(
         </Provider>,
         document.getElementById('root')
 );
-

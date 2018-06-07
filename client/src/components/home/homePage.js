@@ -22,8 +22,6 @@ class Home extends Component {
         super(props, context);
 
         this.state = {
-            token: '',
-            name: '',
             isSignedIn: false,
         };
         this.isSignedIn = this.isSignedIn.bind(this)

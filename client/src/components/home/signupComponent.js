@@ -2,24 +2,13 @@ import React, { Component } from 'react';
 import { Button } from 'react-bootstrap'
 import {FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap'
 import {FieldGroup, checkStatus, parseJSON} from '../../utils/util';
+import {actions} from "../../actions/home";
+import {connect} from "react-redux";
 
 class SignupComponent extends Component {
     constructor(props, context) {
         super(props, context);
-
-        this.handleTextChanges = this.handleTextChanges.bind(this);
         this.signupVerify = this.signupVerify.bind(this);
-        this.state = {
-            username: '',
-            password:'',
-            cellNumber: '',
-            faxNumber: '',
-            firstName: '',
-            lastName: '',
-            idNumber: 0,
-            telNumber: '',
-            companyName: ''
-        };
     }
 
     signupVerify() {
@@ -29,15 +18,15 @@ class SignupComponent extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                username: this.state.username,
-                password: this.state.password,
-                companyName: this.state.companyName,
-                telNumber: this.state.telNumber,
-                cellNumber: this.state.cellNumber,
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
-                idNumber: this.state.idNumber,
-                faxNumber: this.state.faxNumber,
+                username: this.props.username,
+                password: this.props.password,
+                companyName: this.props.companyName,
+                telNumber: this.props.telNumber,
+                cellNumber: this.props.cellNumber,
+                firstName: this.props.firstName,
+                lastName: this.props.lastName,
+                idNumber: this.props.idNumber,
+                faxNumber: this.props.faxNumber,
             })})
             .then(checkStatus)
             .then(parseJSON)
@@ -47,10 +36,6 @@ class SignupComponent extends Component {
             }).catch(function(error) {
             console.log('request failed', error)
         })
-    }
-
-    handleTextChanges(e) {
-        this.setState({ [e.target.name]: e.target.value });
     }
 
     render() {
@@ -66,7 +51,7 @@ class SignupComponent extends Component {
                             label="username"
                             placeholder="Enter Username"
                             name="username"
-                            onChange={this.handleTextChanges}
+                            onChange={this.props.onNewTextChange}
                         />
                         <FieldGroup
                             id="formControlsPasswordS"
@@ -74,7 +59,7 @@ class SignupComponent extends Component {
                             label="Password"
                             placeholder="Enter Password"
                             name="password"
-                            onChange={this.handleTextChanges}
+                            onChange={this.props.onNewTextChange}
                         />
                         <FieldGroup
                             id="formControlsRePassword"
@@ -82,7 +67,7 @@ class SignupComponent extends Component {
                             label="rePassword"
                             placeholder="Re-Type Password"
                             name="rePassword"
-                            onChange={this.handleTextChanges}
+                            onChange={this.props.onNewTextChange}
                         />
                         <FieldGroup
                             id="formControlsFirstName"
@@ -90,7 +75,7 @@ class SignupComponent extends Component {
                             label="First Name"
                             placeholder="First Name"
                             name="firstName"
-                            onChange={this.handleTextChanges}
+                            onChange={this.props.onNewTextChange}
                         />
                         <FieldGroup
                             id="formControlsLastName"
@@ -98,7 +83,7 @@ class SignupComponent extends Component {
                             label="Last Name"
                             placeholder="Last Name"
                             name="lastName"
-                            onChange={this.handleTextChanges}
+                            onChange={this.props.onNewTextChange}
                         />
                         <FieldGroup
                             id="formControlsCellNumber"
@@ -106,7 +91,7 @@ class SignupComponent extends Component {
                             label="Cell Number"
                             placeholder="Cell Number"
                             name="cellNumber"
-                            onChange={this.handleTextChanges}
+                            onChange={this.props.onNewTextChange}
                         />
                         <FieldGroup
                             id="formControlsIdNumber"
@@ -114,7 +99,7 @@ class SignupComponent extends Component {
                             label="ID Number"
                             placeholder="ID Number"
                             name="idNumber"
-                            onChange={this.handleTextChanges}
+                            onChange={this.props.onNewTextChange}
                         />
                         <FieldGroup
                             id="formControlsTelNumber"
@@ -122,7 +107,7 @@ class SignupComponent extends Component {
                             label="Tel Number"
                             placeholder="Tel Number"
                             name="telNumber"
-                            onChange={this.handleTextChanges}
+                            onChange={this.props.onNewTextChange}
                         />
                         <FieldGroup
                             id="formControlsCompanyName"
@@ -130,7 +115,7 @@ class SignupComponent extends Component {
                             label="Company Name"
                             placeholder="Company Name"
                             name="companyName"
-                            onChange={this.handleTextChanges}
+                            onChange={this.props.onNewTextChange}
                         />
                         <FieldGroup
                             id="formControlsFaxNumber"
@@ -138,7 +123,7 @@ class SignupComponent extends Component {
                             label="Fax Number"
                             placeholder="Fax Number"
                             name="faxNumber"
-                            onChange={this.handleTextChanges}
+                            onChange={this.props.onNewTextChange}
                         />
 
                         <Button onClick={
@@ -154,4 +139,26 @@ class SignupComponent extends Component {
     }
 }
 
-export default SignupComponent;
+function mapStateToProps(state) {
+    return {
+        username: state.username,
+        password: state.password,
+        cellNumber: state.cellNumber,
+        faxNumber: state.faxNumber,
+        firstName: state.firstName,
+        lastName: state.lastName,
+        idNumber: state.idNumber,
+        telNumber: state.telNumber,
+        companyName: state.companyName
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        onNewTextChange(newTextChange) {
+            dispatch(actions.handleTextChanged(newTextChange))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignupComponent);
