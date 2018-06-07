@@ -49,17 +49,6 @@ class SignupComponent extends Component {
         })
     }
 
-
-    // getValidationState() {
-    //     const length = this.state.password.length;
-    //     if (length > 10) return 'success';
-    //     else if (length > 5) return 'warning';
-    //     else if (length > 0) return 'error';
-    //     return null;
-    // }
-
-
-
     handleTextChanges(e) {
         this.setState({ [e.target.name]: e.target.value });
     }
@@ -68,7 +57,6 @@ class SignupComponent extends Component {
         return (
                 <FormGroup
                     controlId="formBasicText"
-                    //validationState={this.getValidationState()}
                 >
                     <ControlLabel>Signup an account</ControlLabel>
                     <form>

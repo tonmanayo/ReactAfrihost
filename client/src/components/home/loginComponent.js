@@ -3,18 +3,13 @@ import { Button } from 'react-bootstrap'
 import {FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap'
 import jwt_decode from 'jwt-decode';
 import {FieldGroup, checkStatus, parseJSON} from '../../utils/util';
+import { connect } from 'react-redux';
+import { actions } from './../../stores/store'
 
 class LoginComponent extends Component {
     constructor(props, context) {
         super(props, context);
-
-       this.handleTextChange = this.handleTextChange.bind(this);
-       this.loginVerify = this.loginVerify.bind(this);
-       this.state = {
-            username: '',
-            password:'',
-            error: ''
-       };
+        this.loginVerify = this.loginVerify.bind(this);
     }
 
     loginVerify() {
@@ -24,8 +19,8 @@ class LoginComponent extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                username: this.state.username,
-                password: this.state.password
+                username: this.props.username,
+                password: this.props.password
             })})
             .then(checkStatus)
             .then(parseJSON)
@@ -36,12 +31,8 @@ class LoginComponent extends Component {
                 localStorage.setItem('userId', JSON.stringify(data['userId']));
                 this.props.isSignedIn();
             }).catch((error) => {
-                this.setState({error: "Login Failed - " + error});
+                this.props.onError(error)
         })
-    }
-
-    handleTextChange(e) {
-        this.setState({[e.target.name]: e.target.value });
     }
 
     render() {
@@ -55,7 +46,7 @@ class LoginComponent extends Component {
                                 label="username"
                                 placeholder="Enter Username"
                                 name="username"
-                                onChange={this.handleTextChange}
+                                onChange={this.props.onNewTextChange}
                             />
                             <FieldGroup
                                 id="formControlsPassword"
@@ -63,7 +54,7 @@ class LoginComponent extends Component {
                                 label="Password"
                                 placeholder="Enter Password"
                                 name="password"
-                                onChange={this.handleTextChange}
+                                onChange={this.props.onNewTextChange}
                             />
 
                             <Button onClick={
@@ -72,10 +63,29 @@ class LoginComponent extends Component {
 
                                 </form>
                         <FormControl.Feedback />
-                        <HelpBlock > <p style={{color: "red"}}>{this.state.error} </p></HelpBlock>
+                        <HelpBlock > <p style={{color: "red"}}>{this.props.error} </p></HelpBlock>
                     </FormGroup>
         );
     }
 }
 
-export default LoginComponent;
+function mapStateToProps(state) {
+    return {
+        username: state.username,
+        password: state.password,
+        error: state.error
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        onNewTextChange(newTextChange) {
+            dispatch(actions.handleTextChanged(newTextChange))
+        },
+        onError(newError) {
+            dispatch(actions.handleNewError(newError))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginComponent);
