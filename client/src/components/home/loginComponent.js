@@ -37,6 +37,7 @@ class LoginComponent extends Component {
     }
 
     render() {
+        const onNewTextChange = this.props.onNewTextChange;
         return (
                     <FormGroup controlId="formBasicText">
                         <ControlLabel>Enter User Name and Password</ControlLabel>
@@ -47,7 +48,7 @@ class LoginComponent extends Component {
                                 label="username"
                                 placeholder="Enter Username"
                                 name="username"
-                                onChange={this.props.onNewTextChange}
+                                onChange={onNewTextChange}
                             />
                             <FieldGroup
                                 id="formControlsPassword"
@@ -55,7 +56,7 @@ class LoginComponent extends Component {
                                 label="Password"
                                 placeholder="Enter Password"
                                 name="password"
-                                onChange={this.props.onNewTextChange}
+                                onChange={onNewTextChange}
                             />
 
                             <Button onClick={

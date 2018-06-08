@@ -13,6 +13,8 @@ class ProductsComponent extends Component {
         //this.onDelete = this.onDelete.bind(this);
         //this.getProducts = this.getProducts.bind(this);
       //  this.onAdd = this.onAdd.bind(this);
+        this.addProduct = this.addProduct.bind(this);
+
     }
 
     componentWillMount() {
@@ -55,12 +57,17 @@ class ProductsComponent extends Component {
     //
     // }
 
+    addProduct(event) {
+        event.preventDefault();
+        this.props.onProductAdd(this.props.friendlyName, this.props.isPaused, this.props.status, this.props.uid);
+    }
+
     render() {
         return (
             <div className="productsPage" style={{width: '100%'}}>
                 <div style={{width: '45%', float: 'left'}}>
                     <CreateProductComponent
-                       // onAdd={this.onAdd}
+                       addProduct={this.addProduct}
                     />
                 </div>
                 <div style={{width: '45%', float: 'right'}}>
@@ -78,7 +85,11 @@ const mapStateToProps = (state) => {
     return {
         products: state.productReducer.products,
         hasErrored: state.itemsHasErrored,
-        isLoading: state.itemsIsLoading
+        isLoading: state.itemsIsLoading,
+        uid: state.defaultReducer.uid,
+        friendlyName: state.defaultReducer.friendlyName,
+        isPaused: state.defaultReducer.isPaused,
+        status: state.defaultReducer.status,
     };
 };
 
@@ -86,6 +97,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchData() {
             dispatch(productActions.itemsFetchData())
+        },
+        onProductAdd(friendlyName, isPaused, status, uid) {
+            dispatch(productActions.itemsAddData(friendlyName, isPaused, status, uid))
         }
     };
 };

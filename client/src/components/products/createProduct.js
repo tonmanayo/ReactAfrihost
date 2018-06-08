@@ -10,31 +10,6 @@ class CreateProductComponent extends Component {
     constructor(props, context) {
         super(props, context);
 
-        this.addProduct = this.addProduct.bind(this);
-    }
-
-    addProduct(event) {
-        event.preventDefault();
-        const {friendlyName, isPaused, status, uid} = this.props;
-        fetch('http://localhost:3001/products/add', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                friendlyName: friendlyName,
-                isPaused: isPaused,
-                status: status,
-                uid: uid
-            })})
-            .then(checkStatus)
-            .then(parseJSON)
-            .then((data) => {
-                console.log('request succeeded with JSON response', data);
-                this.props.onProductAdd(friendlyName, isPaused, status, uid, data["obj"]._id);
-            }).catch((error) => {
-            console.log('request failed', error)
-        })
     }
 
     render() {
@@ -46,7 +21,7 @@ class CreateProductComponent extends Component {
                 >
                     <ControlLabel>Create New Product</ControlLabel>
                     <form onSubmit={
-                        this.addProduct
+                        this.props.addProduct
                     }>
                         <FieldGroup
                             id="formControlsProductName"
@@ -98,7 +73,6 @@ function mapStateToProps(state) {
         friendlyName: friendlyName,
         isPaused: isPaused,
         status: status,
-        products: state.productReducer
     }
 }
 
@@ -106,9 +80,6 @@ function mapDispatchToProps(dispatch) {
     return {
         onNewTextChange(newTextChange) {
             dispatch(defaultActions.handleTextChanged(newTextChange))
-        },
-        onProductAdd(friendlyName, isPaused, status, uid, _id) {
-            dispatch(productActions.addProduct(friendlyName, isPaused, status, uid, _id))
         }
     }
 }
