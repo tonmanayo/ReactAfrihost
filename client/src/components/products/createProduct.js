@@ -4,7 +4,6 @@ import {FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap'
 import {FieldGroup, checkStatus, parseJSON} from '../../utils/util';
 import {defaultActions} from "../../actions/defaultActions";
 import {connect} from "react-redux";
-import {productActions} from "../../actions/productActions";
 
 class CreateProductComponent extends Component {
     constructor(props, context) {

@@ -72,7 +72,7 @@ class ProductsComponent extends Component {
                 </div>
                 <div style={{width: '45%', float: 'right'}}>
                     <ShowProductsComponent
-                        //onDelete={this.onDelete}
+                        onDelete={this.props.onProductDelete}
                         products={this.props.products}
                     />
                 </div>
@@ -100,6 +100,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         onProductAdd(friendlyName, isPaused, status, uid) {
             dispatch(productActions.itemsAddData(friendlyName, isPaused, status, uid))
+        },
+        onProductDelete(product) {
+            dispatch(productActions.itemsRemoveData(product))
         }
     };
 };
