@@ -4,6 +4,7 @@ import {FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap'
 import {FieldGroup, checkStatus, parseJSON} from '../../utils/util';
 import {defaultActions} from "../../actions/defaultActions";
 import {connect} from "react-redux";
+import {productActions} from "../../actions/productActions";
 
 class CreateProductComponent extends Component {
     constructor(props, context) {
@@ -30,7 +31,7 @@ class CreateProductComponent extends Component {
             .then(parseJSON)
             .then((data) => {
                 console.log('request succeeded with JSON response', data);
-                this.props.onAdd(friendlyName, isPaused, status, uid, data["obj"]._id);
+                this.props.onProductAdd(friendlyName, isPaused, status, uid, data["obj"]._id);
             }).catch((error) => {
             console.log('request failed', error)
         })
@@ -97,6 +98,7 @@ function mapStateToProps(state) {
         friendlyName: friendlyName,
         isPaused: isPaused,
         status: status,
+        products: state.productReducer
     }
 }
 
@@ -104,6 +106,9 @@ function mapDispatchToProps(dispatch) {
     return {
         onNewTextChange(newTextChange) {
             dispatch(defaultActions.handleTextChanged(newTextChange))
+        },
+        onProductAdd(friendlyName, isPaused, status, uid, _id) {
+            dispatch(productActions.addProduct(friendlyName, isPaused, status, uid, _id))
         }
     }
 }
