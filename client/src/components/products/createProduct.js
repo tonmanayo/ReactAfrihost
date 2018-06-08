@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button } from 'react-bootstrap'
 import {FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap'
 import {FieldGroup, checkStatus, parseJSON} from '../../utils/util';
-import {actions} from "../../actions/home";
+import {defaultActions} from "../../actions/defaultActions";
 import {connect} from "react-redux";
 
 class CreateProductComponent extends Component {
@@ -12,8 +12,8 @@ class CreateProductComponent extends Component {
         this.addProduct = this.addProduct.bind(this);
     }
 
-    addProduct(e) {
-        e.preventDefault();
+    addProduct(event) {
+        event.preventDefault();
         const {friendlyName, isPaused, status, uid} = this.props;
         fetch('http://localhost:3001/products/add', {
             method: 'POST',
@@ -31,12 +31,13 @@ class CreateProductComponent extends Component {
             .then((data) => {
                 console.log('request succeeded with JSON response', data);
                 this.props.onAdd(friendlyName, isPaused, status, uid, data["obj"]._id);
-            }).catch(function(error) {
+            }).catch((error) => {
             console.log('request failed', error)
         })
     }
 
     render() {
+        const onNewTextChange = this.props.onNewTextChange;
         return (
             <div className="createProduct">
                 <FormGroup
@@ -52,7 +53,7 @@ class CreateProductComponent extends Component {
                             label="Product Name"
                             placeholder="Product Name"
                             name="uid"
-                            onChange={this.props.onNewTextChange}
+                            onChange={onNewTextChange}
                         />
                         <FieldGroup
                             id="formControlsFriendlyName"
@@ -60,7 +61,7 @@ class CreateProductComponent extends Component {
                             label="Friendly Name"
                             placeholder="Friendly Name"
                             name="friendlyName"
-                            onChange={this.props.onNewTextChange}
+                            onChange={onNewTextChange}
                         />
                         <FieldGroup
                             id="formControlsIsPaused"
@@ -68,7 +69,7 @@ class CreateProductComponent extends Component {
                             label="Is Paused?"
                             placeholder="Is Paused?"
                             name="isPaused"
-                            onChange={this.props.onNewTextChange}
+                            onChange={onNewTextChange}
                         />
                         <FieldGroup
                             id="formControlsStatus"
@@ -76,7 +77,7 @@ class CreateProductComponent extends Component {
                             label="Status"
                             placeholder="Status"
                             name="status"
-                            onChange={this.props.onNewTextChange}
+                            onChange={onNewTextChange}
                         />
 
                         <Button type="submit" bsStyle="primary"  >Submit</Button>
@@ -85,24 +86,24 @@ class CreateProductComponent extends Component {
                     {/*<HelpBlock>Validation is based on string length.</HelpBlock>*/}
                 </FormGroup>
             </div>
-
         );
     }
 }
 
 function mapStateToProps(state) {
+    const {uid, friendlyName, isPaused, status} = state.defaultReducer;
     return {
-        uid: state.uid,
-        friendlyName: state.friendlyName,
-        isPaused: state.isPaused,
-        status: state.status,
+        uid: uid,
+        friendlyName: friendlyName,
+        isPaused: isPaused,
+        status: status,
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         onNewTextChange(newTextChange) {
-            dispatch(actions.handleTextChanged(newTextChange))
+            dispatch(defaultActions.handleTextChanged(newTextChange))
         }
     }
 }

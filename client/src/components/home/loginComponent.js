@@ -4,7 +4,8 @@ import {FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap'
 import jwt_decode from 'jwt-decode';
 import {FieldGroup, checkStatus, parseJSON} from '../../utils/util';
 import { connect } from 'react-redux';
-import { actions } from './../../actions/home'
+import { defaultActions } from '../../actions/defaultActions'
+import {homeActions} from "../../actions/homeActions";
 
 class LoginComponent extends Component {
     constructor(props, context) {
@@ -71,19 +72,19 @@ class LoginComponent extends Component {
 
 function mapStateToProps(state) {
     return {
-        username: state.username,
-        password: state.password,
-        error: state.error
+        username: state.defaultReducer.username,
+        password: state.defaultReducer.password,
+        error: state.homeReducer.error
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         onNewTextChange(newTextChange) {
-            dispatch(actions.handleTextChanged(newTextChange))
+            dispatch(defaultActions.handleTextChanged(newTextChange))
         },
         onError(newError) {
-            dispatch(actions.handleNewError(newError))
+            dispatch(homeActions.handleNewError(newError))
         }
     }
 }
