@@ -27,4 +27,3 @@ export function productReducer(state = {products: []}, action) {
         default: return state
     }
 }
-

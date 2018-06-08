@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import LoginComponent from './loginComponent'
 import SignupComponent from "./signupComponent";
 import ProductsComponent from "../products/productsPage";
-import {checkStatus, getFromStorage, parseJSON} from '../../utils/util'
+import {checkStatus, parseJSON} from '../../utils/util'
+import {homeActions} from "../../actions/homeActions";
+import {connect} from "react-redux";
+
 
 function findUser(userId) {
     fetch('http://localhost:3001/auth/findUser/' + userId)
@@ -20,43 +23,33 @@ function findUser(userId) {
 class Home extends Component {
     constructor(props, context) {
         super(props, context);
-
-        this.state = {
-            isSignedIn: false,
-        };
-        this.isSignedIn = this.isSignedIn.bind(this)
     }
 
     componentDidMount() {
-        const token = getFromStorage('userId');
-        if (token) {
-            if (findUser(token)){
-                this.isSignedIn()
-            }
-        } else {
-            this.setState({
-                isSignedIn: false
-            })
-        }
-    }
-
-    isSignedIn() {
-        this.setState({
-            isSignedIn: true
-        });
+        // const token = getFromStorage('userId');
+        // if (token) {
+        //     if (findUser(token)){
+        //         this.isSignedIn()
+        //     }
+        // } else {
+        //     this.setState({
+        //         isSignedIn: false
+        //     })
+        // }
     }
 
     render() {
-        if (!this.state.isSignedIn) {
+        console.log(this.props);
+        if (!this.props.signedIn) {
             return (
                 <div style={{width: '100%', marginTop: '10px'}}>
                     <div style={{width: '45%', float: 'left'}}>
                         <div style={{display: 'block', marginLeft: 'auto', marginRight: 'auto', width: '90%' }}>
-                            <LoginComponent isSignedIn={this.isSignedIn}/>
+                            <LoginComponent isSignedIn={this.props.isSignedIn}/>
                         </div>
                     </div>
                     <div style={{width: '45%', float: 'right'}}>
-                        <SignupComponent isSignedIn={this.isSignedIn}/>
+                        <SignupComponent isSignedIn={this.props.isSignedIn}/>
                     </div>
                 </div>
             );
@@ -68,4 +61,18 @@ class Home extends Component {
     }
 }
 
-export default Home;
+function mapStateToProps(state) {
+    return {
+        signedIn: state.homeReducer.signedIn,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        isSignedIn(username, password) {
+            dispatch(homeActions.signIn(username, password))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

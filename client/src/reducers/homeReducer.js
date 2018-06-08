@@ -1,15 +1,23 @@
-import {HANDLE_ERROR} from "../actions/homeActions";
+import {SIGNIN_SUCCESS} from "../actions/homeActions";
+import {ITEMS_HAS_ERRORED} from "../actions/productActions";
 
 const initialHomeState = {
-    error: ''
+    error: '',
+    signedIn: false
 };
 
 export function homeReducer(state = initialHomeState, action) {
     switch (action.type) {
-        case HANDLE_ERROR: {
+        case ITEMS_HAS_ERRORED: {
             return {
                 ...state,
-                error: "" + action.newErrorValue
+                error: "" + action.error
+            }
+        }
+        case SIGNIN_SUCCESS: {
+            return {
+                ...state,
+                signedIn: true
             }
         }
         default: return state

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import CreateProductComponent from "./createProduct";
 import ShowProductsComponent from "./showProducts";
-import {checkStatus, parseJSON} from '../../utils/util';
 import {connect} from "react-redux";
 import {productActions} from "../../actions/productActions";
 
@@ -10,52 +9,14 @@ class ProductsComponent extends Component {
     constructor(props, context) {
         super(props, context);
 
-        //this.onDelete = this.onDelete.bind(this);
-        //this.getProducts = this.getProducts.bind(this);
-      //  this.onAdd = this.onAdd.bind(this);
         this.addProduct = this.addProduct.bind(this);
 
     }
 
     componentWillMount() {
-       // this.getProducts();
         this.props.fetchData();
     }
 
-    // getProducts() {
-    //     fetch('http://localhost:3001/products/allPosts')
-    //         .then(checkStatus)
-    //         .then(parseJSON)
-    //         .then((data) => {
-    //             this.setState({
-    //                 products: data["products"]
-    //             })
-    //         }).catch((error) => {
-    //         console.log('request failed', error)
-    //     })
-    // }
-
-    // onDelete(id) {
-    //     const filter = this.state.products.filter(product => {
-    //         return product._id !== id
-    //     });
-    //     this.setState({products: filter})
-    // }
-
-    // onAdd(friendlyName, isPaused, status, uid, _id){
-    //     let products = this.state.products;
-    //     products.push({
-    //         createdAt: Date.now(),
-    //         updatedAt: Date.now(),
-    //         friendlyName: friendlyName,
-    //         isPaused: isPaused,
-    //         status: status,
-    //         _id: _id,
-    //         uid: uid
-    //     });
-    //     this.setState({products: products})
-    //
-    // }
 
     addProduct(event) {
         event.preventDefault();

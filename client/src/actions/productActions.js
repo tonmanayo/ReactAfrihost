@@ -1,6 +1,4 @@
 import { parseJSON } from '../utils/util';
-export const ADD_PRODUCT = 'ADD_PRODUCT';
-export const DELETE_PRODUCT = 'DELETE_PRODUCT';
 export const ITEMS_HAS_ERRORED = 'ITEMS_HAS_ERRORED';
 export const ITEMS_IS_LOADING = 'ITEMS_IS_LOADING';
 export const ITEMS_FETCH_DATA_SUCCESS = 'ITEMS_FETCH_DATA_SUCCESS';

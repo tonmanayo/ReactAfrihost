@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap'
 import {FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap'
-import {FieldGroup, checkStatus, parseJSON} from '../../utils/util';
+import {FieldGroup} from '../../utils/util';
 import {defaultActions} from "../../actions/defaultActions";
 import {connect} from "react-redux";
 
 class CreateProductComponent extends Component {
-    constructor(props, context) {
-        super(props, context);
-
-    }
-
     render() {
         const onNewTextChange = this.props.onNewTextChange;
         return (
