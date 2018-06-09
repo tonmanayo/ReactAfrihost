@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap'
-import {FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap'
-import {FieldGroup} from '../../utils/util';
+import { FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap'
+import { FieldGroup } from '../../utils/util';
 import { connect } from 'react-redux';
 import { defaultActions } from '../../actions/defaultActions'
-import {homeActions} from "../../actions/homeActions";
+import { homeActions } from "../../actions/homeActions";
 
 class LoginComponent extends Component {
     render() {

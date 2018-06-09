@@ -8,15 +8,12 @@ import {productActions} from "../../actions/productActions";
 class ProductsComponent extends Component {
     constructor(props, context) {
         super(props, context);
-
         this.addProduct = this.addProduct.bind(this);
-
     }
 
     componentWillMount() {
         this.props.fetchData();
     }
-
 
     addProduct(event) {
         event.preventDefault();

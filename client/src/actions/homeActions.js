@@ -17,16 +17,12 @@ export const homeActions = {
                     username: username,
                     password: password,
                 })})
-                .then((response) => {
-                    if (!response.ok) {
-                        throw Error(response.statusText);
-                    }
-                    return response;
-
-                })
+                .then(checkStatus)
                 .then(parseJSON)
-                .then((token) =>
+                .then((token) => {
+                    console.log(token);
                     dispatch(authApiCall.loginSuccess(token))
+                }
                 ).catch((error) => dispatch(authApiCall.loginError(error)));
         };
     },
@@ -50,8 +46,9 @@ export const homeActions = {
                 })})
                 .then(checkStatus)
                 .then(parseJSON)
-                .then((data) =>
-                    dispatch(authApiCall.signupSuccess(data))
+                .then((data) => {
+                        dispatch(authApiCall.signupSuccess(data))
+                    }
                 ).catch((error) => dispatch(authApiCall.signupError(error)));
         };
     }

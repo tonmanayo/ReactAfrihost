@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap'
-import {FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap'
-import {FieldGroup} from '../../utils/util';
-import {defaultActions} from "../../actions/defaultActions";
-import {connect} from "react-redux";
-import {productReducer} from "../../reducers/productReducer";
+import { FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap'
+import { FieldGroup } from '../../utils/util';
+import { defaultActions } from "../../actions/defaultActions";
+import { connect } from "react-redux";
 
 class CreateProductComponent extends Component {
     render() {

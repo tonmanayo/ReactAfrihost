@@ -39,7 +39,6 @@ class Home extends Component {
     }
 
     render() {
-        console.log(this.props);
         if (!this.props.loggedin) {
             return (
                 <div style={{width: '100%', marginTop: '10px'}}>
