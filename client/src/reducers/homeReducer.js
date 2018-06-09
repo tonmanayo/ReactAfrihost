@@ -1,23 +1,30 @@
-import {SIGNIN_SUCCESS} from "../actions/homeActions";
-import {ITEMS_HAS_ERRORED} from "../actions/productActions";
+import {LOGIN_SUCCESS, LOGIN_MESSAGE, SIGNUP_MESSAGE} from "../actions/homeActions";
+
 
 const initialHomeState = {
-    error: '',
-    signedIn: false
+    loginMessage: '',
+    loggedin: false,
+    signedupMessage: ''
 };
 
 export function homeReducer(state = initialHomeState, action) {
     switch (action.type) {
-        case ITEMS_HAS_ERRORED: {
+        case LOGIN_SUCCESS: {
             return {
                 ...state,
-                error: "" + action.error
+                loggedin: true
             }
         }
-        case SIGNIN_SUCCESS: {
+        case LOGIN_MESSAGE: {
             return {
                 ...state,
-                signedIn: true
+                loginMessage: "" + action.message
+            }
+        }
+        case SIGNUP_MESSAGE: {
+            return {
+                ...state,
+                signedupMessage: "" + action.message
             }
         }
         default: return state

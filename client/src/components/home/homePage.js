@@ -40,16 +40,16 @@ class Home extends Component {
 
     render() {
         console.log(this.props);
-        if (!this.props.signedIn) {
+        if (!this.props.loggedin) {
             return (
                 <div style={{width: '100%', marginTop: '10px'}}>
                     <div style={{width: '45%', float: 'left'}}>
                         <div style={{display: 'block', marginLeft: 'auto', marginRight: 'auto', width: '90%' }}>
-                            <LoginComponent isSignedIn={this.props.isSignedIn}/>
+                            <LoginComponent/>
                         </div>
                     </div>
                     <div style={{width: '45%', float: 'right'}}>
-                        <SignupComponent isSignedIn={this.props.isSignedIn}/>
+                        <SignupComponent />
                     </div>
                 </div>
             );
@@ -63,14 +63,14 @@ class Home extends Component {
 
 function mapStateToProps(state) {
     return {
-        signedIn: state.homeReducer.signedIn,
+        loggedin: state.homeReducer.loggedin,
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        isSignedIn(username, password) {
-            dispatch(homeActions.signIn(username, password))
+        login(username, password) {
+            dispatch(homeActions.login(username, password))
         }
     }
 }

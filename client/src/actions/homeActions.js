@@ -1,19 +1,12 @@
 import {parseJSON} from "../utils/util";
-import {ITEMS_HAS_ERRORED, ITEMS_IS_LOADING} from "./productActions";
 
-export const HANDLE_ERROR = 'HANDLE_ERROR';
-export const SIGNIN_SUCCESS = 'SIGNIN_SUCCESS';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_MESSAGE = 'LOGIN_MESSAGE';
+export const SIGNUP_MESSAGE = 'SIGNUP_MESSAGE';
 
 export const homeActions = {
-    handleNewError(newErrorValue) {
-        return {
-            type: HANDLE_ERROR,
-            newErrorValue
-        }
-    },
-    signIn(username, password) {
+    login(username, password) {
         return (dispatch) => {
-            dispatch(authApiCall.itemsIsLoading(true));
             fetch('http://localhost:3001/auth/signin', {
                 method: 'POST',
                 headers: {
@@ -27,33 +20,34 @@ export const homeActions = {
                     if (!response.ok) {
                         throw Error(response.statusText);
                     }
-                    dispatch(authApiCall.itemsIsLoading(false));
                     return response;
+
                 })
                 .then(parseJSON)
                 .then((token) =>
-                    dispatch(authApiCall.successfullyLoggedIn(token))
+                    dispatch(authApiCall.loginSuccess(token))
                 )
-                .catch((error) => dispatch(authApiCall.itemsHasErrored(error)));
+                .catch((error) => dispatch(authApiCall.loginError(error)));
         };
     },
 };
 
 export const authApiCall = {
-    itemsHasErrored(error) {
+    loginError(message) {
         return {
-            type: ITEMS_HAS_ERRORED,
-            error
+            type: LOGIN_MESSAGE,
+            message: message
         }
     },
-    itemsIsLoading(bool) {
+    signupError(message) {
         return {
-            type: ITEMS_IS_LOADING,
-            isLoading: bool
+            type: SIGNUP_MESSAGE,
+            message: message
         }
-    },successfullyLoggedIn(token) {
+    },
+    loginSuccess(token) {
         return {
-            type: SIGNIN_SUCCESS,
+            type: LOGIN_SUCCESS,
             token
 
         }

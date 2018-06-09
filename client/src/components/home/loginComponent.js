@@ -7,10 +7,6 @@ import { defaultActions } from '../../actions/defaultActions'
 import {homeActions} from "../../actions/homeActions";
 
 class LoginComponent extends Component {
-    constructor(props, context) {
-        super(props, context);
-    }
-
     render() {
         const onNewTextChange = this.props.onNewTextChange;
         return (
@@ -40,7 +36,7 @@ class LoginComponent extends Component {
 
                                 </form>
                         <FormControl.Feedback />
-                        <HelpBlock > <p style={{color: "red"}}>{this.props.error} </p></HelpBlock>
+                        <HelpBlock > <p style={{color: "red"}}>{this.props.message} </p></HelpBlock>
                     </FormGroup>
         );
     }
@@ -50,7 +46,7 @@ function mapStateToProps(state) {
     return {
         username: state.defaultReducer.username,
         password: state.defaultReducer.password,
-        error: state.homeReducer.error,
+        message: state.homeReducer.loginMessage,
     }
 }
 
@@ -59,11 +55,8 @@ function mapDispatchToProps(dispatch) {
         onNewTextChange(newTextChange) {
             dispatch(defaultActions.handleTextChanged(newTextChange))
         },
-        onError(newError) {
-            dispatch(homeActions.handleNewError(newError))
-        },
         loginVerify(username, password) {
-            dispatch(homeActions.signIn(username, password))
+            dispatch(homeActions.login(username, password))
         }
     }
 }

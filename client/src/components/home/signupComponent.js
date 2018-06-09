@@ -133,7 +133,7 @@ class SignupComponent extends Component {
 
                     </form>
                     <FormControl.Feedback />
-                    <HelpBlock>Validation is based on string length.</HelpBlock>
+                    <HelpBlock>this.props.message</HelpBlock>
                 </FormGroup>
 
         );
@@ -149,7 +149,8 @@ function mapStateToProps(state) {
         lastName,
         idNumber,
         telNumber,
-        companyName} = state.defaultReducer;
+        companyName
+    } = state.defaultReducer;
     return {
         username: username,
         password: password,
@@ -159,7 +160,8 @@ function mapStateToProps(state) {
         lastName: lastName,
         idNumber: idNumber,
         telNumber: telNumber,
-        companyName: companyName
+        companyName: companyName,
+        message: state.homeReducer.message
 }
 }
 

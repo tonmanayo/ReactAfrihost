@@ -1,36 +1,22 @@
-import { parseJSON } from '../utils/util';
+import { parseJSON, checkStatus } from '../utils/util';
 export const ITEMS_HAS_ERRORED = 'ITEMS_HAS_ERRORED';
-export const ITEMS_IS_LOADING = 'ITEMS_IS_LOADING';
 export const ITEMS_FETCH_DATA_SUCCESS = 'ITEMS_FETCH_DATA_SUCCESS';
 export const ITEMS_ADD_DATA_SUCCESS = 'ITEMS_ADD_DATA_SUCCESS';
 export const ITEMS_DELETE_DATA_SUCCESS = 'ITEMS_DELETE_DATA_SUCCESS';
-
 
 export const productActions = {
 
     itemsFetchData() {
         return (dispatch) => {
-            dispatch(apiCall.itemsIsLoading(true));
-
             fetch('http://localhost:3001/products/allPosts')
-                .then((response) => {
-                    if (!response.ok) {
-                        throw Error(response.statusText);
-                    }
-
-                    dispatch(apiCall.itemsIsLoading(false));
-
-                    return response;
-                })
+                .then(checkStatus)
                 .then(parseJSON)
-                .then((products) => dispatch(apiCall.itemsFetchDataSuccess(products['products'])))
-                .catch(() => dispatch(apiCall.itemsHasErrored(true)));
+                .then((products) => dispatch(productsApiCall.itemsFetchDataSuccess(products['products'])))
+                .catch((error) => dispatch(productsApiCall.itemsHasErrored(error)));
         };
     },
     itemsAddData(friendlyName, isPaused, status, uid) {
         return (dispatch) => {
-            dispatch(apiCall.itemsIsLoading(true));
-
             fetch('http://localhost:3001/products/add', {
                 method: 'POST',
                 headers: {
@@ -42,48 +28,28 @@ export const productActions = {
                     status: status,
                     uid: uid
                 })})
-                .then((response) => {
-                    if (!response.ok) {
-                        throw Error(response.statusText);
-                    }
-                    dispatch(apiCall.itemsIsLoading(false));
-                    return response;
-                })
+                .then(checkStatus)
                 .then(parseJSON)
-                .then((products) => dispatch(apiCall.itemsAddDataSuccess(products['obj'])))
-                .catch(() => dispatch(apiCall.itemsHasErrored(true)));
+                .then((products) => dispatch(productsApiCall.itemsAddDataSuccess(products['obj'])))
+                .catch((error) => dispatch(productsApiCall.itemsHasErrored(error)));
         };
     },
     itemsRemoveData(product) {
         return (dispatch) => {
-            dispatch(apiCall.itemsIsLoading(true));
-
             fetch('http://localhost:3001/products/delete/' + product._id)
-                .then((response) => {
-                    if (!response.ok) {
-                        throw Error(response.statusText);
-                    }
-                    dispatch(apiCall.itemsIsLoading(false));
-                    return response;
-                })
+                .then(checkStatus)
                 .then(parseJSON)
-                .then((products) => dispatch(apiCall.itemsDeleteDataSuccess(products['products'])))
-                .catch(() => dispatch(apiCall.itemsHasErrored(true)));
+                .then((products) => dispatch(productsApiCall.itemsDeleteDataSuccess(products['products'])))
+                .catch((error) => dispatch(productsApiCall.itemsHasErrored(error)));
         };
     }
 };
 
-export const apiCall = {
-    itemsHasErrored(bool) {
+export const productsApiCall = {
+    itemsHasErrored(message) {
         return {
             type: ITEMS_HAS_ERRORED,
-            hasErrored: bool
-        }
-    },
-    itemsIsLoading(bool) {
-        return {
-            type: ITEMS_IS_LOADING,
-            isLoading: bool
+            message: message
         }
     },
     itemsFetchDataSuccess(products) {

@@ -4,6 +4,7 @@ import {FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap'
 import {FieldGroup} from '../../utils/util';
 import {defaultActions} from "../../actions/defaultActions";
 import {connect} from "react-redux";
+import {productReducer} from "../../reducers/productReducer";
 
 class CreateProductComponent extends Component {
     render() {
@@ -53,7 +54,7 @@ class CreateProductComponent extends Component {
                         <Button type="submit" bsStyle="primary"  >Submit</Button>
                     </form>
                     <FormControl.Feedback />
-                    {/*<HelpBlock>Validation is based on string length.</HelpBlock>*/}
+                    <HelpBlock>{this.props.message}</HelpBlock>
                 </FormGroup>
             </div>
         );
@@ -67,6 +68,7 @@ function mapStateToProps(state) {
         friendlyName: friendlyName,
         isPaused: isPaused,
         status: status,
+        message: state.productReducer.errorMessage
     }
 }
 
