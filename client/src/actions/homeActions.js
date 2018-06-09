@@ -1,8 +1,9 @@
-import {parseJSON} from "../utils/util";
+import {checkStatus, parseJSON} from "../utils/util";
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_MESSAGE = 'LOGIN_MESSAGE';
 export const SIGNUP_MESSAGE = 'SIGNUP_MESSAGE';
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 
 export const homeActions = {
     login(username, password) {
@@ -26,10 +27,34 @@ export const homeActions = {
                 .then(parseJSON)
                 .then((token) =>
                     dispatch(authApiCall.loginSuccess(token))
-                )
-                .catch((error) => dispatch(authApiCall.loginError(error)));
+                ).catch((error) => dispatch(authApiCall.loginError(error)));
         };
     },
+    signup(props) {
+        return (dispatch) => {
+            fetch('http://localhost:3001/auth/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: props.username,
+                    password: props.password,
+                    companyName: props.companyName,
+                    telNumber: props.telNumber,
+                    cellNumber: props.cellNumber,
+                    firstName: props.firstName,
+                    lastName: props.lastName,
+                    idNumber: props.idNumber,
+                    faxNumber: props.faxNumber,
+                })})
+                .then(checkStatus)
+                .then(parseJSON)
+                .then((data) =>
+                    dispatch(authApiCall.signupSuccess(data))
+                ).catch((error) => dispatch(authApiCall.signupError(error)));
+        };
+    }
 };
 
 export const authApiCall = {
@@ -49,6 +74,14 @@ export const authApiCall = {
         return {
             type: LOGIN_SUCCESS,
             token
+
+        }
+    },
+    signupSuccess(token) {
+        return {
+            type: SIGNUP_SUCCESS,
+            toke: token,
+            loggedin: true
 
         }
     }

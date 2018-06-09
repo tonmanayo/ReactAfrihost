@@ -4,39 +4,15 @@ import {FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap'
 import {FieldGroup, checkStatus, parseJSON} from '../../utils/util';
 import {defaultActions} from "../../actions/defaultActions";
 import {connect} from "react-redux";
+import {homeActions} from "../../actions/homeActions";
 
 class SignupComponent extends Component {
     constructor(props, context) {
         super(props, context);
-        this.signupVerify = this.signupVerify.bind(this);
+
     }
 
-    signupVerify() {
-        fetch('http://localhost:3001/auth/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: this.props.username,
-                password: this.props.password,
-                companyName: this.props.companyName,
-                telNumber: this.props.telNumber,
-                cellNumber: this.props.cellNumber,
-                firstName: this.props.firstName,
-                lastName: this.props.lastName,
-                idNumber: this.props.idNumber,
-                faxNumber: this.props.faxNumber,
-            })})
-            .then(checkStatus)
-            .then(parseJSON)
-            .then((data) => {
-                this.props.isSignedIn();
-                console.log('request succeeded with JSON response', data)
-            }).catch(function(error) {
-            console.log('request failed', error)
-        })
-    }
+
 
     render() {
         const onNewTextChange = this.props.onNewTextChange;
@@ -127,13 +103,13 @@ class SignupComponent extends Component {
                             onChange={onNewTextChange}
                         />
 
-                        <Button onClick={
-                            this.signupVerify
+                        <Button onClick={ () =>
+                            this.props.signup(this.props)
                         } bsStyle="primary"  >Submit</Button>
 
                     </form>
                     <FormControl.Feedback />
-                    <HelpBlock>this.props.message</HelpBlock>
+                    <HelpBlock>{this.props.message}</HelpBlock>
                 </FormGroup>
 
         );
@@ -161,14 +137,17 @@ function mapStateToProps(state) {
         idNumber: idNumber,
         telNumber: telNumber,
         companyName: companyName,
-        message: state.homeReducer.message
-}
+        message: state.homeReducer.signedupMessage
+    }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         onNewTextChange(newTextChange) {
             dispatch(defaultActions.handleTextChanged(newTextChange))
+        },
+        signup(props) {
+            dispatch(homeActions.signup(props))
         }
     }
 }
