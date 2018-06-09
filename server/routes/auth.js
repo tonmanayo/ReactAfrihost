@@ -33,7 +33,7 @@ router.post('/signup', (req, res, next) => {
                 error: err
             })
         }
-        const token = jwt.sign({user: user}, 'Afrihost', {expiresIn: 604800});  //Tuesday 14 August, guessing 1 week
+        const token = jwt.sign({userId: result._id}, 'Afrihost', {expiresIn: 604800});  //Tuesday 14 August, guessing 1 week
         res.status(201).json({
             title: 'user created',
             token: token,
@@ -58,26 +58,25 @@ router.post('/signin', (req, res, next) => {
             });
         }
 
-        const token = jwt.sign({user: user}, 'Afrihost', {expiresIn: 604800});  //Tuesday 14 August, guessing 1 week
+        const token = jwt.sign({user: user._id}, 'Afrihost', {expiresIn: 604800});  //Tuesday 14 August, guessing 1 week
         res.status(201).json({
             message: 'login successful',
             token: token,
-            userId: user._id
         })
     });
 });
 
 router.get('/findUser/:id', (req, res, next) => {
-    Product.findOne({_id: req.params.id }, (err, user) => {
+    Product.findOne({_id: req.params.id }, (err) => {
         if(err) {
             return res.status(500).json({
-                title: "error, No user Registered",
-                error: err
+                title: "error, No user Registered: " + err,
+                found: false
             })
         }
         return res.status(201).json({
             title: 'Successfully Found user',
-            user: user
+            found: true
         });
     });
 });
