@@ -4,8 +4,19 @@ import { FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap
 import { FieldGroup } from '../../utils/util';
 import { defaultActions } from "../../actions/defaultActions";
 import { connect } from "react-redux";
+import {productActions} from "../../actions/productActions";
+import {authApiCall, homeActions} from "../../actions/homeActions";
 
 class CreateProductComponent extends Component {
+    constructor(props, context) {
+        super(props, context);
+        this.logout = this.logout.bind(this);
+    }
+
+    logout() {
+        localStorage.removeItem('token');
+        this.props.logout()
+    }
     render() {
         const onNewTextChange = this.props.onNewTextChange;
         return (
@@ -50,7 +61,8 @@ class CreateProductComponent extends Component {
                             onChange={onNewTextChange}
                         />
 
-                        <Button type="submit" bsStyle="primary"  >Submit</Button>
+                        <Button type="submit" bsStyle="success"  >Submit</Button>
+                        <Button bsStyle="primary" style={{float: 'right'}} onClick={() => {this.logout()}} >Logout</Button>
                     </form>
                     <FormControl.Feedback />
                     <HelpBlock>{this.props.message}</HelpBlock>
@@ -75,6 +87,9 @@ function mapDispatchToProps(dispatch) {
     return {
         onNewTextChange(newTextChange) {
             dispatch(defaultActions.handleTextChanged(newTextChange))
+        },
+        logout() {
+            dispatch(authApiCall.noUser())
         }
     }
 }

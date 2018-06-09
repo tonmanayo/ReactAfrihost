@@ -2,49 +2,29 @@ import React, { Component } from 'react';
 import LoginComponent from './loginComponent'
 import SignupComponent from "./signupComponent";
 import ProductsComponent from "../products/productsPage";
-import {checkStatus, parseJSON} from '../../utils/util'
-import {homeActions} from "../../actions/homeActions";
-import {connect} from "react-redux";
+import { homeActions } from "../../actions/homeActions";
+import { connect } from "react-redux";
+import jwt_decode from "jwt-decode"
 
-
-function findUser(userId) {
-    fetch('http://localhost:3001/auth/findUser/' + userId)
-        .then(checkStatus)
-        .then(parseJSON)
-        .then(function(data) {
-            console.log('request succeeded with JSON response', data);
-            return true;
-        }).catch(function(error) {
-        console.log('request failed', error);
-        return false
-    })
-}
 
 class Home extends Component {
-    constructor(props, context) {
-        super(props, context);
-    }
 
     componentDidMount() {
-        // const token = getFromStorage('userId');
-        // if (token) {
-        //     if (findUser(token)){
-        //         this.isSignedIn()
-        //     }
-        // } else {
-        //     this.setState({
-        //         isSignedIn: false
-        //     })
-        // }
+        const token = JSON.parse(localStorage.getItem('token'));
+        if (token) {
+            console.log(jwt_decode(token));
+            const user = jwt_decode(token)['user'];
+            this.props.findUser(user)
+        }
     }
 
     render() {
-        if (!this.props.loggedin) {
+        if (this.props.loggedin === false) {
             return (
                 <div style={{width: '100%', marginTop: '10px'}}>
                     <div style={{width: '45%', float: 'left'}}>
                         <div style={{display: 'block', marginLeft: 'auto', marginRight: 'auto', width: '90%' }}>
-                            <LoginComponent/>
+                            <LoginComponent />
                         </div>
                     </div>
                     <div style={{width: '45%', float: 'right'}}>
@@ -70,6 +50,9 @@ function mapDispatchToProps(dispatch) {
     return {
         login(username, password) {
             dispatch(homeActions.login(username, password))
+        },
+        findUser(id) {
+            dispatch(homeActions.findUser(id))
         }
     }
 }

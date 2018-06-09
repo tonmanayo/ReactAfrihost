@@ -3,9 +3,15 @@ export const ITEMS_HAS_ERRORED = 'ITEMS_HAS_ERRORED';
 export const ITEMS_FETCH_DATA_SUCCESS = 'ITEMS_FETCH_DATA_SUCCESS';
 export const ITEMS_ADD_DATA_SUCCESS = 'ITEMS_ADD_DATA_SUCCESS';
 export const ITEMS_DELETE_DATA_SUCCESS = 'ITEMS_DELETE_DATA_SUCCESS';
+export const LOGOUT = 'LOGOUT';
 
 export const productActions = {
 
+    logout() {
+        return {
+            type: LOGOUT
+        }
+    },
     itemsFetchData() {
         return (dispatch) => {
             fetch('http://localhost:3001/products/allPosts')

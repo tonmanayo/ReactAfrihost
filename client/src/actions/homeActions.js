@@ -4,6 +4,8 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_MESSAGE = 'LOGIN_MESSAGE';
 export const SIGNUP_MESSAGE = 'SIGNUP_MESSAGE';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
+export const FOUND_USER_SUCCESS = 'FOUND_USER_SUCCESS';
+export const NO_USER = 'NO_USER';
 
 export const homeActions = {
     login(username, password) {
@@ -16,13 +18,15 @@ export const homeActions = {
                 body: JSON.stringify({
                     username: username,
                     password: password,
-                })})
+                })
+            })
                 .then(checkStatus)
                 .then(parseJSON)
-                .then((token) => {
-                    console.log(token);
-                    dispatch(authApiCall.loginSuccess(token))
-                }
+                .then((data) => {
+                        dispatch(authApiCall.loginSuccess(data));
+                        localStorage.removeItem('token');
+                        localStorage.setItem('token', JSON.stringify(data['token']));
+                    }
                 ).catch((error) => dispatch(authApiCall.loginError(error)));
         };
     },
@@ -43,15 +47,30 @@ export const homeActions = {
                     lastName: props.lastName,
                     idNumber: props.idNumber,
                     faxNumber: props.faxNumber,
-                })})
+                })
+            })
                 .then(checkStatus)
                 .then(parseJSON)
                 .then((data) => {
-                        dispatch(authApiCall.signupSuccess(data))
+                        dispatch(authApiCall.signupSuccess(data));
+                        localStorage.removeItem('token');
+                        localStorage.setItem('token', JSON.stringify(data['token']));
                     }
                 ).catch((error) => dispatch(authApiCall.signupError(error)));
         };
+    },
+    findUser(userId) {
+        return (dispatch) => {
+            fetch('http://localhost:3001/auth/findUser/' + userId)
+                .then(checkStatus)
+                .then(parseJSON)
+                .then((data) => {
+                        dispatch(authApiCall.foundUser(data));
+                    }
+                ).catch(() => dispatch(authApiCall.noUser()))
+        }
     }
+
 };
 
 export const authApiCall = {
@@ -80,6 +99,19 @@ export const authApiCall = {
             toke: token,
             loggedin: true
 
+        }
+    },
+    foundUser() {
+        return {
+            type: FOUND_USER_SUCCESS,
+            loggedin: true
+
+        }
+    },
+    noUser() {
+        return {
+            type: NO_USER,
+            loggedin: false
         }
     }
 };

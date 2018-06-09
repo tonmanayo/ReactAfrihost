@@ -1,7 +1,7 @@
 import {
     ITEMS_ADD_DATA_SUCCESS,
     ITEMS_DELETE_DATA_SUCCESS,
-    ITEMS_FETCH_DATA_SUCCESS, ITEMS_HAS_ERRORED
+    ITEMS_FETCH_DATA_SUCCESS, ITEMS_HAS_ERRORED, LOGOUT
 } from "../actions/productActions";
 
 const initialHProductsState = {
@@ -33,6 +33,12 @@ export function productReducer(state = initialHProductsState, action) {
             return {
                 ...state,
                 errorMessage: "" + action.message
+            };
+        }
+        case LOGOUT: {
+            return {
+                ...state,
+                loggedin: false
             };
         }
         default: return state

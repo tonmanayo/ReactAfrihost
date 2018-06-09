@@ -1,4 +1,11 @@
-import {LOGIN_SUCCESS, LOGIN_MESSAGE, SIGNUP_MESSAGE, SIGNUP_SUCCESS} from "../actions/homeActions";
+import {
+    LOGIN_SUCCESS,
+    LOGIN_MESSAGE,
+    SIGNUP_MESSAGE,
+    SIGNUP_SUCCESS,
+    FOUND_USER_SUCCESS,
+    NO_USER
+} from "../actions/homeActions";
 
 
 const initialHomeState = {
@@ -32,6 +39,18 @@ export function homeReducer(state = initialHomeState, action) {
                 ...state,
                 signedupMessage: "Successfully Signed-Up",
                 loggedin: action.loggedin
+            }
+        }
+        case FOUND_USER_SUCCESS: {
+            return {
+                ...state,
+                loggedin: true
+            }
+        }
+        case NO_USER: {
+            return {
+                ...state,
+                loggedin: false
             }
         }
         default: return state

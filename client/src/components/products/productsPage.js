@@ -19,16 +19,15 @@ class ProductsComponent extends Component {
         event.preventDefault();
         this.props.onProductAdd(this.props.friendlyName, this.props.isPaused, this.props.status, this.props.uid);
     }
-
     render() {
         return (
-            <div className="productsPage" style={{width: '100%'}}>
-                <div style={{width: '45%', float: 'left'}}>
+            <div className="productsPage" style={{width: '100%', marginTop: '10px'}}>
+                <div style={{width: '45%', float: 'left', marginLeft: '20px'}}>
                     <CreateProductComponent
                        addProduct={this.addProduct}
                     />
                 </div>
-                <div style={{width: '45%', float: 'right'}}>
+                <div style={{width: '45%', float: 'right', marginRight: '20px', marginTop: '20px'}}>
                     <ShowProductsComponent
                         onDelete={this.props.onProductDelete}
                         products={this.props.products}
