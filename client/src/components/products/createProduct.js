@@ -1,24 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap'
 import { FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap'
 import { FieldGroup } from '../../utils/util';
 import { defaultActions } from "../../actions/defaultActions";
 import { connect } from "react-redux";
-import {productActions} from "../../actions/productActions";
-import {authApiCall, homeActions} from "../../actions/homeActions";
+import { authApiCall } from "../../actions/homeActions";
 
-class CreateProductComponent extends Component {
-    constructor(props, context) {
-        super(props, context);
-        this.logout = this.logout.bind(this);
-    }
-
-    logout() {
+const CreateProductComponent = (props) => {
+    function logout() {
         localStorage.removeItem('token');
-        this.props.logout()
+        props.logout()
     }
-    render() {
-        const onNewTextChange = this.props.onNewTextChange;
+        const onNewTextChange = props.onNewTextChange;
         return (
             <div className="createProduct">
                 <FormGroup
@@ -26,7 +19,7 @@ class CreateProductComponent extends Component {
                 >
                     <ControlLabel>Create New Product</ControlLabel>
                     <form onSubmit={
-                        this.props.addProduct
+                        props.addProduct
                     }>
                         <FieldGroup
                             id="formControlsProductName"
@@ -62,15 +55,14 @@ class CreateProductComponent extends Component {
                         />
 
                         <Button type="submit" bsStyle="success"  >Submit</Button>
-                        <Button bsStyle="primary" style={{float: 'right'}} onClick={() => {this.logout()}} >Logout</Button>
+                        <Button bsStyle="primary" style={{float: 'right'}} onClick={() => {logout()}} >Logout</Button>
                     </form>
                     <FormControl.Feedback />
-                    <HelpBlock>{this.props.message}</HelpBlock>
+                    <HelpBlock>{props.message}</HelpBlock>
                 </FormGroup>
             </div>
         );
-    }
-}
+};
 
 function mapStateToProps(state) {
     const {uid, friendlyName, isPaused, status} = state.defaultReducer;

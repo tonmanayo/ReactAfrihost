@@ -4,7 +4,6 @@ import ShowProductsComponent from "./showProducts";
 import {connect} from "react-redux";
 import {productActions} from "../../actions/productActions";
 
-
 class ProductsComponent extends Component {
     constructor(props, context) {
         super(props, context);

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap'
 import {FormControl, FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap'
 import { FieldGroup } from '../../utils/util';
@@ -6,9 +6,8 @@ import { defaultActions } from "../../actions/defaultActions";
 import { connect } from "react-redux";
 import { homeActions } from "../../actions/homeActions";
 
-class SignupComponent extends Component {
-    render() {
-        const onNewTextChange = this.props.onNewTextChange;
+const SignupComponent = (props) => {
+        const onNewTextChange = props.onNewTextChange;
         return (
                 <FormGroup
                     controlId="formBasicText"
@@ -97,17 +96,15 @@ class SignupComponent extends Component {
                         />
 
                         <Button onClick={ () =>
-                            this.props.signup(this.props)
+                            props.signup(props)
                         } bsStyle="primary"  >Submit</Button>
 
                     </form>
                     <FormControl.Feedback />
-                    <HelpBlock>{this.props.message}</HelpBlock>
+                    <HelpBlock>{props.message}</HelpBlock>
                 </FormGroup>
-
         );
-    }
-}
+};
 
 function mapStateToProps(state) {
     const {username,

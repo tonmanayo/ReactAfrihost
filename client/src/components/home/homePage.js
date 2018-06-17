@@ -6,7 +6,6 @@ import { homeActions } from "../../actions/homeActions";
 import { connect } from "react-redux";
 import jwt_decode from "jwt-decode"
 
-
 class Home extends Component {
 
     componentDidMount() {
