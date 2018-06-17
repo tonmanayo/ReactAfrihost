@@ -6,3 +6,4 @@
 cd into Server and client and do a npm install
 then npm start in server folder and npm start in client folder
 <p></h2>
+TODO - user input checks - radio buttons
