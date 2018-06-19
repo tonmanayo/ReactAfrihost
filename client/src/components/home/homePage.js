@@ -39,21 +39,21 @@ class Home extends Component {
     }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
     return {
         loggedin: state.homeReducer.loggedin,
     }
-}
+};
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
     return {
-        login(username, password) {
+        login: (username, password) => {
             dispatch(homeActions.login(username, password))
         },
-        findUser(id) {
+        findUser: (id) => {
             dispatch(homeActions.findUser(id))
         }
     }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

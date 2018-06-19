@@ -40,23 +40,23 @@ const LoginComponent = (props) => {
     );
 };
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
     return {
         username: state.defaultReducer.username,
         password: state.defaultReducer.password,
         message: state.homeReducer.loginMessage,
     }
-}
+};
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
     return {
-        onNewTextChange(newTextChange) {
+        onNewTextChange: (newTextChange) => {
             dispatch(defaultActions.handleTextChanged(newTextChange))
         },
-        loginVerify(username, password) {
+        loginVerify: (username, password) => {
             dispatch(homeActions.login(username, password))
         }
     }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginComponent);

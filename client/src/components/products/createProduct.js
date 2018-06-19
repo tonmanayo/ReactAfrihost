@@ -7,10 +7,10 @@ import { connect } from "react-redux";
 import { authApiCall } from "../../actions/homeActions";
 
 const CreateProductComponent = (props) => {
-    function logout() {
+    const logout = () => {
         localStorage.removeItem('token');
         props.logout()
-    }
+    };
         const onNewTextChange = props.onNewTextChange;
         return (
             <div className="createProduct">
@@ -64,7 +64,7 @@ const CreateProductComponent = (props) => {
         );
 };
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
     const {uid, friendlyName, isPaused, status} = state.defaultReducer;
     return {
         uid: uid,
@@ -73,17 +73,17 @@ function mapStateToProps(state) {
         status: status,
         message: state.productReducer.errorMessage
     }
-}
+};
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
     return {
-        onNewTextChange(newTextChange) {
+        onNewTextChange: (newTextChange) => {
             dispatch(defaultActions.handleTextChanged(newTextChange))
         },
-        logout() {
+        logout: () => {
             dispatch(authApiCall.noUser())
         }
     }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateProductComponent);
