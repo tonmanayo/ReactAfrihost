@@ -3,6 +3,7 @@ import CreateProductComponent from "./createProduct";
 import ShowProductsComponent from "./showProducts";
 import {connect} from "react-redux";
 import {productActions} from "../../actions/productActions";
+import {Redirect} from "react-router-dom";
 
 class ProductsPage extends Component {
     constructor(props, context) {
@@ -19,6 +20,11 @@ class ProductsPage extends Component {
         this.props.onProductAdd(this.props.friendlyName, this.props.isPaused, this.props.status, this.props.uid);
     }
     render() {
+        if (this.props.loggedin === false) {
+            return <div>
+                <Redirect to='/'/>
+            </div>
+        }
         return (
             <div className="productsPage" style={{width: '100%', marginTop: '10px'}}>
                 <div style={{width: '45%', float: 'left', marginLeft: '20px'}}>
@@ -39,6 +45,7 @@ class ProductsPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        loggedin: state.homeReducer.loggedin,
         products: state.productReducer.products,
         hasErrored: state.itemsHasErrored,
         isLoading: state.itemsIsLoading,
