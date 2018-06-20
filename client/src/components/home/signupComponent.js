@@ -132,7 +132,7 @@ const mapStateToProps = (state) => {
     }
 };
 
-mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
     return {
         onNewTextChange: (newTextChange) => {
             dispatch(defaultActions.handleTextChanged(newTextChange))
@@ -143,4 +143,4 @@ mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignupComponent);
+export default (connect(mapStateToProps, mapDispatchToProps)(SignupComponent));

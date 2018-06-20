@@ -4,7 +4,7 @@ import ShowProductsComponent from "./showProducts";
 import {connect} from "react-redux";
 import {productActions} from "../../actions/productActions";
 
-class ProductsComponent extends Component {
+class ProductsPage extends Component {
     constructor(props, context) {
         super(props, context);
         this.addProduct = this.addProduct.bind(this);
@@ -63,5 +63,5 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductsComponent);
+export default (connect(mapStateToProps, mapDispatchToProps)(ProductsPage));
 
